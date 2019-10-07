@@ -17,6 +17,9 @@ RUN apt install openjdk-8-jdk-headless -y
 RUN wget https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux.zip
 RUN unzip GAMA_1.8_Linux.zip
 
+# Remove useless archive
+RUN rm GAMA_1.8_Linux.zip -y
+
 WORKDIR ./headless
 
 ENTRYPOINT ["bash", "./gama-headless.sh"]
