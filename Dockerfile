@@ -18,7 +18,7 @@ RUN wget https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8
 RUN unzip GAMA_1.8_Linux.zip
 
 # Remove useless archive
-RUN rm GAMA_1.8_Linux.zip -y
+RUN rm GAMA_1.8_Linux.zip
 
 WORKDIR ./headless
 
