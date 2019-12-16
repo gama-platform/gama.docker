@@ -3,12 +3,10 @@ FROM ubuntu
 
 MAINTAINER RoiArthurB <https://github.com/RoiArthurB>
 
-# Update Ubuntu
-RUN apt update
-RUN apt upgrade -y
-
-# install needed software
-RUN apt install wget zip -y
+# Update Ubuntu mirror && install needed software
+RUN apt update && apt install -y \
+	wget \
+	zip
 
 # install OpenJDK 8
 #RUN apt install openjdk-8-jdk-headless -y
