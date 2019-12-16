@@ -8,22 +8,18 @@ RUN apt update && apt install -y \
 	wget \
 	zip
 
-# install OpenJDK 8
-#RUN apt install openjdk-8-jdk-headless -y
-
 # Create GAMA workspace
-RUN mkdir /usr/local/gama
-RUN cd /usr/local/gama
+RUN mkdir -p /usr/local/gama \
+	&& cd /usr/local/gama
 
 # Install GAMA v1.8.0
-RUN wget https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux_with_JDK.zip
-RUN unzip GAMA_1.8_Linux_with_JDK.zip
+RUN curl -SL https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux_with_JDK.zip \
+	| unzip GAMA_1.8_Linux_with_JDK.zip \
+	&& rm GAMA_1.8_Linux_with_JDK.zip
 
 # fix GAMA JDK
 RUN sed -i 's/java\ /\.\.\/jdk\/bin\/java\ /g' ./headless/gama-headless.sh
 
-# Remove useless archive
-RUN rm GAMA_1.8_Linux_with_JDK.zip
 
 # Create command symlink
 RUN chmod +x ./Gama ./headless/gama-headless.sh
