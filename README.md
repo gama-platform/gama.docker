@@ -21,7 +21,7 @@ cd ./gama.docker
 Build the Docker image
 
 ```
-docker build gama .
+docker build -t gama .
 ```
 
 # Installation
