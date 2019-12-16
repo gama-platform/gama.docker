@@ -13,8 +13,8 @@ RUN mkdir -p /usr/local/gama \
 	&& cd /usr/local/gama
 
 # Install GAMA v1.8.0
-RUN curl -SL https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux_with_JDK.zip \
-	| unzip GAMA_1.8_Linux_with_JDK.zip \
+RUN wget https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux_with_JDK.zip \
+	&& unzip GAMA_1.8_Linux_with_JDK.zip \
 	&& rm GAMA_1.8_Linux_with_JDK.zip
 
 # fix GAMA JDK
