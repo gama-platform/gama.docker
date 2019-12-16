@@ -13,12 +13,21 @@ RUN apt install wget zip -y
 # install OpenJDK 8
 #RUN apt install openjdk-8-jdk-headless -y
 
+# Create GAMA workspace
+RUN mkdir /usr/local/gama
+RUN cd /usr/local/gama
+
 # Install GAMA v1.8.0
 RUN wget https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux_with_JDK.zip
 RUN unzip GAMA_1.8_Linux_with_JDK.zip
 
 # Remove useless archive
 RUN rm GAMA_1.8_Linux_with_JDK.zip
+
+# Create command symlink
+RUN chmod +x ./Gama ./headless/gama-headless.sh
+RUN ln -s ./Gama /usr/bin/gama
+RUN ln -s ./headless/gama-headless.sh /usr/sbin/gama-headless
 
 WORKDIR ./headless
 
