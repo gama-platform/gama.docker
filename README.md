@@ -55,7 +55,7 @@ docker run -i -t --entrypoint /bin/bash <containerID>
 # Exemple
 
 ```
-
+$ docker run gama -help
 gama-headless.sh
 ******************************************************************
 * GAMA version 1.8                                               *
