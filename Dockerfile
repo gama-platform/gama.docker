@@ -11,14 +11,14 @@ RUN apt upgrade -y
 RUN apt install wget zip -y
 
 # install OpenJDK 8
-RUN apt install openjdk-8-jdk-headless -y
+#RUN apt install openjdk-8-jdk-headless -y
 
 # Install GAMA v1.8.0
-RUN wget https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux.zip
-RUN unzip GAMA_1.8_Linux.zip
+RUN wget https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux_with_JDK.zip
+RUN unzip GAMA_1.8_Linux_with_JDK.zip
 
 # Remove useless archive
-RUN rm GAMA_1.8_Linux.zip
+RUN rm GAMA_1.8_Linux_with_JDK.zip
 
 WORKDIR ./headless
 
