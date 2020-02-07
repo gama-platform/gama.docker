@@ -1,10 +1,9 @@
-FROM ubuntu
-#FROM openjdk:8
+FROM ubuntu:bionic
 
 MAINTAINER RoiArthurB <https://github.com/RoiArthurB>
 
 # Update Ubuntu mirror && install needed software
-RUN apt update && apt install -y \
+RUN apt update && apt upgrade -y && apt install -y \
 	wget \
 	zip
 
@@ -25,6 +24,9 @@ RUN sed -i 's/java\ /\.\.\/jdk\/bin\/java\ /g' /usr/lib/gama/headless/gama-headl
 RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 RUN ln -s /usr/lib/gama/Gama /usr/bin/gama \
 	&& ln -s /usr/lib/gama/headless/gama-headless.sh /usr/sbin/gama-headless
+
+# Cleaning container
+RUN apt autoremove --purge -y
 
 # Docker env
 WORKDIR /usr/lib/gama/headless
