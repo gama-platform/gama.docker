@@ -4,20 +4,18 @@ MAINTAINER RoiArthurB <https://github.com/RoiArthurB>
 
 # Update Ubuntu mirror && install needed software
 RUN apt update && \
-	apt install -y --no-install-recommends wget ca-certificates unzip && \
+	apt install -y --no-install-recommends curl ca-certificates unzip && \
 	# Keep layer as small as possible
-	apt autoremove -y && \
-	apt autoclean -y
+        rm -rf /var/lib/apt/lists/*
 
 # Create GAMA workspace
 RUN mkdir -p /usr/lib/gama 
 RUN cd /usr/lib/gama
 
 # Install GAMA v1.8.0
-RUN wget https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux_with_JDK.zip && \
-	unzip GAMA_1.8_Linux_with_JDK.zip -d /usr/lib/gama && \
-	rm GAMA_1.8_Linux_with_JDK.zip && \
-
+RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux_with_JDK.zip && \
+	unzip gama.zip -d /usr/lib/gama && \
+	rm gama.zip && \
 	# fix GAMA JDK path
 	sed -i 's/java\ /\.\.\/jdk\/bin\/java\ /g' /usr/lib/gama/headless/gama-headless.sh
 
