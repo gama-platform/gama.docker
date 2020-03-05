@@ -2,6 +2,14 @@ FROM ubuntu:bionic
 
 MAINTAINER RoiArthurB <https://github.com/RoiArthurB>
 
+LABEL org.label-schema.name="GAMA Headless Docker" \
+		org.label-schema.description="Docker image of GAMA headless" \
+		org.label-schema.url="http://gama-platform.org" \
+		org.label-schema.vcs-ref=$VCS_REF \
+		org.label-schema.vcs-url="https://github.com/gama-platform/gama.docker" \
+		org.label-schema.vendor="GAMA Platform" \
+		org.label-schema.license="GPL-3.0" 
+
 # Update Ubuntu mirror && install needed software
 RUN apt update && \
 	apt install -y --no-install-recommends curl ca-certificates unzip && \
@@ -17,7 +25,7 @@ RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/downloa
 	unzip gama.zip -d /usr/lib/gama && \
 	rm gama.zip && \
 	# fix GAMA JDK path
-	sed -i 's/java\ /\.\.\/jdk\/bin\/java\ /g' /usr/lib/gama/headless/gama-headless.sh
+	sed -i 's/java\ /\/usr\/lib\/gama\/jdk\/bin\/java\ /g' /usr/lib/gama/headless/gama-headless.sh
 
 
 # Create command symlink
