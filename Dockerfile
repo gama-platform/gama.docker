@@ -25,7 +25,7 @@ RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/downloa
 	unzip gama.zip -d /usr/lib/gama && \
 	rm gama.zip && \
 	# fix GAMA JDK path
-	sed -i 's/java\ /\/usr\/lib\/gama\/jdk\/bin\/java\ /g' /usr/lib/gama/headless/gama-headless.sh
+	sed -i 's/java\ /\/usr\/lib\/gama\/jdk\/bin\/java\ /g' /usr/lib/gama/headless/gama-headless.sh && \
 	# Set everything in absolute path
 	sed -i 's/\.\.\//\/usr\/lib\/gama\//g' /usr/lib/gama/headless/gama-headless.sh
 
