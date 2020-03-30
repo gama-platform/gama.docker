@@ -20,8 +20,8 @@ RUN apt update && \
 RUN mkdir -p /usr/lib/gama 
 RUN cd /usr/lib/gama
 
-# Install GAMA v1.8.0
-RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux_with_JDK.zip && \
+# Download the last continuous build from 
+RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/gama/releases/tags/continuous | grep  continuous/GAMA1.8_Continuous_withJDK_Linux | cut -d : -f 2,3 | tr -d \") && \
 	unzip gama.zip -d /usr/lib/gama && \
 	rm gama.zip && \
 	# fix GAMA JDK path
