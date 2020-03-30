@@ -3,7 +3,7 @@ name: Docker Image CI
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0 21 * * *'
+    - cron:  '0 21 * * *'[GH Action] Update tag on build
   push:
     branches:
     - continuous
@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag gamaplatform/gama:latest
+      run: docker build . --file Dockerfile --tag gamaplatform/gama:continuous
 
     - name: Log in Docker Hub
       run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
