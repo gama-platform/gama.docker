@@ -23,9 +23,7 @@ RUN cd /usr/lib/gama
 # Download the last continuous build from 
 RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/gama/releases/tags/continuous | grep  continuous/GAMA1.8_Continuous_withJDK_Linux | cut -d : -f 2,3 | tr -d \") && \
 	unzip gama.zip -d /usr/lib/gama && \
-	rm gama.zip && \
-	# Set everything in absolute path
-	sed -i 's/\.\.\//\/usr\/lib\/gama\//g' /usr/lib/gama/headless/gama-headless.sh
+	rm gama.zip
 
 
 # Create command symlink
