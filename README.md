@@ -1,11 +1,32 @@
-# Overview
+# GAMA Docker Container
+
 This project is a simple Docker image that contains a GAMA platform ready to use in headless mode with [OpenJDK 8](https://openjdk.java.net/) with a minimal Ubuntu.
 
-# Prerequisites
-* a working [Docker](http://docker.io) engine
-<!-- * a working [Docker Compose](http://docker.io) installation -->
+## Getting Started
 
-# Building
+These instructions will cover usage information and for the docker container 
+
+### Prerequisities
+
+
+In order to run this container you'll need docker installed.
+
+* [Windows](https://docs.docker.com/windows/started)
+* [OS X](https://docs.docker.com/mac/started/)
+* [Linux](https://docs.docker.com/linux/started/)
+
+### Installing
+
+#### Docker Hub pull
+
+```shell
+$ docker pull gama-platform/gama:[continuous|1.8.0|..]
+```
+
+To see all the available tags, see [there](https://hub.docker.com/r/gamaplatform/gama/tags).
+
+#### Building
+
 Clone this repository
 
 ```
@@ -24,27 +45,23 @@ Build the Docker image
 docker build -t gama .
 ```
 
-# Installation
-Docker will automatically install the newly built image into the cache.
+### Usage
 
-# Tips and Tricks
-
-
-## Simple usage
+#### Simple usage
 
 The command to run the previously builded image is simple as below
 
 ```
-docker run gama <custom argument for headless execution>
+docker run gamaplatform/gama:continuous <custom argument for headless execution>
 ```
 
-By default, if you don't add argument after `gama` it will display the help message.
+By default, if you don't add argument after the container image, it will display the help message.
 
-## Shutdown the container
+#### Shutdown the container
 
 The container will stop automatically when the headless run will end.
 
-## Enter in the container
+#### Enter in the container
 
 If you want to enter in bash inside the gama container, you will have to explicitly change the _Docker Entrypoint_ of the container by this way
 
@@ -52,7 +69,7 @@ If you want to enter in bash inside the gama container, you will have to explici
 docker run -i -t --entrypoint /bin/bash <containerID>
 ```
 
-# Exemple
+### Exemple
 
 ```
 $ docker run gama -help
@@ -85,24 +102,31 @@ List of available options:
       build an xml parameter file from a model
 ```
 
-<!-- # Troubleshooting -->
+#### Environment Variables
 
-# Built With
+* `/usr/lib/gama/headless/gama-headless.sh` - Headless launch script (Default `Entrypoint`)
 
-* [GAMA Platform _1.8_](https://gama-platform.github.io/)
-* [Docker]()
+#### Useful File Locations
 
-# Support
+* `/usr/usr/lib/gama` - The continuous version of [GAMA](http://gama-platform.org)
 
-Please post issues about that project here:  
+* `/usr/usr/lib/gama/headless/gama-platform.sh` - The helping file to launch [GAMA Headless](http://gama-platform.org/wiki/Headless)
 
-    https://github.com/gama-platform/gama.docker/issues
+## Built With
 
-# Contributing
+* GAMA-Platform - https://github.com/gama-platform/gama/releases/
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+## Find Us
 
-Please make sure to update tests as appropriate.
+* [GitHub](https://github.com/gama-platform)
+* [Docker Hub](https://hub.docker.com/r/gamaplatform/gama)
+* [GAMA-Platform](https://gama-platform.github.io/)
+
+<!--
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+-->
 
 # Authors
 
