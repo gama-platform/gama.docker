@@ -25,14 +25,11 @@ RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/g
 	unzip gama.zip -d /usr/lib/gama && \
 	rm gama.zip
 
-
-# Create command symlink
-RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh && \
-	ln -s /usr/lib/gama/Gama /usr/bin/gama && \
-	ln -s /usr/lib/gama/headless/gama-headless.sh /usr/sbin/gama-headless
+# Make script executable
+RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 
 # Docker env
 WORKDIR /usr/lib/gama/headless
 
-ENTRYPOINT ["gama-headless"]
+ENTRYPOINT ["/usr/lib/gama/headless/gama-headless.sh"]
 CMD ["-help"]
