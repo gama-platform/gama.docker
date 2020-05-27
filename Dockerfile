@@ -26,7 +26,7 @@ RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/g
 	rm gama.zip
 
 # Make script executable
-RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
+RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh && echo 'alias gama-headless="/usr/lib/gama/headless/gama-headless.sh"' >> /root/.bashrc
 
 # Docker env
 WORKDIR /usr/lib/gama/headless
