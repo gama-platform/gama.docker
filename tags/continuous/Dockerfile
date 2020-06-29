@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 MAINTAINER RoiArthurB <https://github.com/RoiArthurB>
 
-LABEL org.label-schema.name="GAMA Headless Docker" \
+LABEL org.label-schema.name="GAMA Headless Docker (Continuous)" \
 		org.label-schema.description="Docker image of GAMA headless" \
 		org.label-schema.url="http://gama-platform.org" \
 		org.label-schema.vcs-ref=$VCS_REF \
@@ -24,7 +24,7 @@ RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/g
 	unzip gama.zip -d /usr/lib/gama
 
 # Make script executable
-RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh && echo 'alias gama-headless="/usr/lib/gama/headless/gama-headless.sh"' >> /root/.bashrc
+RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 
 FROM openjdk:8-jre-alpine
 COPY --from=0 /usr/lib/gama /usr/lib/gama
