@@ -1,15 +1,14 @@
 name: Docker Image CI - Monthly
 
 on:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 14 1 * *'
   push:
     paths:
     - 'tags/monthly/**'
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 14 1 * *'
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:

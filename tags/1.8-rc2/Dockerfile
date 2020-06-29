@@ -27,7 +27,7 @@ RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/downloa
 # Make script executable
 RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 
-# Release image
+# Release image 
 FROM openjdk:8-jre-alpine
 COPY --from=0 /usr/lib/gama /usr/lib/gama
 
