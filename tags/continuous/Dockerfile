@@ -12,8 +12,7 @@ LABEL org.label-schema.name="GAMA Headless Docker (Continuous)" \
 
 # Update Ubuntu mirror && install needed software
 RUN apt update && \
-	apt install -y --no-install-recommends curl ca-certificates unzip && \
-        rm -rf /var/lib/apt/lists/* # Keep layer as small as possible
+	apt install -y --no-install-recommends curl ca-certificates unzip
 
 # Create GAMA workspace
 RUN mkdir -p /usr/lib/gama 
