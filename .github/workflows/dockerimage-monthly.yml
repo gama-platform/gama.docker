@@ -1,4 +1,4 @@
-name: Docker Monthly Image CI
+name: Docker Image CI - Monthly
 
 on:
   schedule:
