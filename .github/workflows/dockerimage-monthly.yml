@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag gamaplatform/gama:monthly
+      run: docker build . --file ./tags/monthly/Dockerfile --tag gamaplatform/gama:monthly
 
     - name: Log in Docker Hub
       run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
