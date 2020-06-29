@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:latest
 
 MAINTAINER RoiArthurB <https://github.com/RoiArthurB>
 
@@ -13,20 +13,26 @@ LABEL org.label-schema.name="GAMA Headless Docker" \
 # Update Ubuntu mirror && install needed software
 RUN apt update && \
 	apt install -y --no-install-recommends curl ca-certificates unzip && \
-	# Keep layer as small as possible
-        rm -rf /var/lib/apt/lists/*
+        rm -rf /var/lib/apt/lists/* # Keep layer as small as possible
 
 # Create GAMA workspace
 RUN mkdir -p /usr/lib/gama 
 RUN cd /usr/lib/gama
 
 # Download the last continuous build from 
-RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/gama/releases/tags/continuous | grep  continuous/GAMA1.8_Continuous_withJDK_Linux | cut -d : -f 2,3 | tr -d \") && \
-	unzip gama.zip -d /usr/lib/gama && \
-	rm gama.zip
+RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/gama/releases/tags/continuous | grep continuous/GAMA1.8_Continuous_Linux | cut -d : -f 2,3 | tr -d \") && \
+	unzip gama.zip -d /usr/lib/gama
 
 # Make script executable
 RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
+
+FROM openjdk:8-jre-alpine
+COPY --from=0 /usr/lib/gama /usr/lib/gama
+
+RUN apk add bash
+
+# Test if headless is running well
+RUN java -version && /usr/lib/gama/headless/gama-headless.sh -help
 
 # Docker env
 WORKDIR /usr/lib/gama/headless
