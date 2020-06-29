@@ -1,6 +1,6 @@
 # GAMA Docker Container
 
-This project is a simple Docker image that contains a GAMA platform ready to use in headless mode with [OpenJDK 8](https://openjdk.java.net/) with a minimal Ubuntu.
+This project is a simple Docker image that contains a GAMA platform ready to use in headless mode within a minimal [Alpine](https://alpinelinux.org/) [OpenJDK JRE 8](https://openjdk.java.net/) container.
 
 ## Getting Started
 
@@ -20,7 +20,7 @@ In order to run this container you'll need docker installed.
 #### Docker Hub pull
 
 ```shell
-$ docker pull gama-platform/gama:[continuous|1.8.0|..]
+$ docker pull gama-platform/gama:[continuous|1.8.1|..]
 ```
 
 To see all the available tags, see [there](https://hub.docker.com/r/gamaplatform/gama/tags).
@@ -36,7 +36,7 @@ git clone https://github.com/gama-platform/gama.docker
 Move in the cloned repository
 
 ```
-cd ./gama.docker
+cd ./gama.docker/tags/<any-tag-name>
 ```
 
 Build the Docker image
@@ -72,7 +72,7 @@ docker run -i -t --entrypoint /bin/bash <containerID>
 ### Exemple
 
 ```
-$ docker run gama -help
+$ docker run --rm gama-platform/gama:continuous -help
 gama-headless.sh
 ******************************************************************
 * GAMA version 1.8                                               *
@@ -115,6 +115,9 @@ List of available options:
 ## Built With
 
 * GAMA-Platform - https://github.com/gama-platform/gama/releases/
+* Docker - https://docker.com
+* AlpineOS - https://alpinelinux.org/
+* OpenJDK 8 - https://openjdk.java.net/
 
 ## Find Us
 
