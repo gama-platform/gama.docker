@@ -24,7 +24,7 @@ RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/g
 	unzip gama.zip -d /usr/lib/gama
 
 # Make script executable
-RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
+RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh && echo 'alias gama-headless="/usr/lib/gama/headless/gama-headless.sh"' >> /root/.bashrc
 
 FROM openjdk:8-jre-alpine
 COPY --from=0 /usr/lib/gama /usr/lib/gama
