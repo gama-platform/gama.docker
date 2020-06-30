@@ -26,7 +26,7 @@ RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/downloa
 RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 
 # Release image 
-FROM openjdk:8-jre-alpine
+FROM openjdk:8-jdk-alpine
 COPY --from=0 /usr/lib/gama /usr/lib/gama
 
 RUN apk add bash
