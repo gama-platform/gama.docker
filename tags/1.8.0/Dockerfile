@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 MAINTAINER RoiArthurB <https://github.com/RoiArthurB>
 
-LABEL org.label-schema.name="GAMA Headless Docker" \
+LABEL org.label-schema.name="GAMA Headless Docker (1.8.0)" \
 		org.label-schema.description="Docker image of GAMA headless" \
 		org.label-schema.url="http://gama-platform.org" \
 		org.label-schema.vcs-ref=$VCS_REF \
@@ -31,13 +31,11 @@ RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 FROM openjdk:8-jdk-alpine
 COPY --from=0 /usr/lib/gama /usr/lib/gama
 
-RUN apk add bash
-
-# Test if headless is running well
-RUN java -version && /usr/lib/gama/headless/gama-headless.sh -help
+RUN apk add bash \
+	&& ln -s /usr/lib/gama/headless/gama-headless.sh /usr/sbin/gama-headless
 
 # Docker env
 WORKDIR /usr/lib/gama/headless
 
-ENTRYPOINT ["/usr/lib/gama/headless/gama-headless.sh"]
+ENTRYPOINT ["gama-headless"]
 CMD ["-help"]

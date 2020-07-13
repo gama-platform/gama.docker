@@ -22,6 +22,8 @@ RUN cd /usr/lib/gama
 RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/gama/releases/tags/monthly | grep monthly/GAMA1.8_Monthly_Linux | cut -d : -f 2,3 | tr -d \") && \
 	unzip gama.zip -d /usr/lib/gama
 
+RUN sed -i 's/"$( dirname "${BASH_SOURCE\[0\]}" )"/\/usr\/lib\/gama\/headless/g' /usr/lib/gama/headless/gama-headless.sh
+
 # Make script executable
 RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 
@@ -29,13 +31,11 @@ RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 FROM openjdk:8-jdk-alpine
 COPY --from=0 /usr/lib/gama /usr/lib/gama
 
-RUN apk add bash
-
-# Test if headless is running well
-RUN java -version && /usr/lib/gama/headless/gama-headless.sh -help
+RUN apk add bash \
+	&& ln -s /usr/lib/gama/headless/gama-headless.sh /usr/sbin/gama-headless
 
 # Docker env
 WORKDIR /usr/lib/gama/headless
 
-ENTRYPOINT ["/usr/lib/gama/headless/gama-headless.sh"]
+ENTRYPOINT ["gama-headless"]
 CMD ["-help"]
