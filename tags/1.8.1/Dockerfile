@@ -23,7 +23,7 @@ RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/downloa
 	unzip gama.zip -d /usr/lib/gama
 
 # Set absolute path
-RUN sed -i 's/"$( dirname "${BASH_SOURCE\[0\]}" )"/\/usr\/lib\/gama\/headless/g' /usr/lib/gama/headless/gama-headless.sh
+RUN sed -i 's/$( dirname "${BASH_SOURCE\[0\]}" )/\/usr\/lib\/gama\/headless/g' /usr/lib/gama/headless/gama-headless.sh
 
 # Make script executable
 RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
