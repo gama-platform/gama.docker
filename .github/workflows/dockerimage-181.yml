@@ -3,7 +3,7 @@ name: Docker Image CI - 1.8.1
 on:
   push:
     paths:
-    - 'tags/1.8.0/**'
+    - 'tags/1.8.1/**'
 
 jobs:
   build:

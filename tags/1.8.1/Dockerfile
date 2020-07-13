@@ -15,7 +15,7 @@ RUN apt update && \
 	apt install -y --no-install-recommends curl ca-certificates unzip
 
 # Create GAMA workspace
-RUN mkdir -p /usr/lib/gama 
+RUN mkdir -p /usr/lib/gama
 RUN cd /usr/lib/gama
 
 # Install GAMA v1.8.0
