@@ -1,4 +1,4 @@
-name: Docker Image CI - 1.8.1
+name: Docker Image CI - Latest
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
     - 'tags/1.8.1/**'
   schedule:
     - cron: "0 0 * */5 *" # Prevent Docker Hub stale
-  workflow_dispatch:
 
 jobs:
   build:
