@@ -31,7 +31,7 @@ jobs:
       run: |
         docker login docker.pkg.github.com -u RoiArthurB -p ${{ secrets.GITHUB_TOKEN }}
         docker images
-        docker tag ${{ docker images | tail -n 1 | cut -d ' ' -f 19 }} docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        docker tag $(docker images | tail -n 1 | cut -d ' ' -f 19) docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker logout
         
