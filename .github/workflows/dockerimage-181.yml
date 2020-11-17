@@ -5,8 +5,12 @@ on:
     paths:
     - 'tags/1.8.1/**'
   schedule:
-    - cron: "0 0 * */5 *" # Prevent Docker Hub stale
+    - cron: "0 0 0 */5 *" # Prevent Docker Hub stale
   workflow_dispatch:
+
+env:
+  IMAGE_NAME: gama
+  VERSION: 1.8.1
 
 jobs:
   build:
@@ -15,10 +19,18 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Build the Docker image
-      run: docker build . --file ./tags/1.8.1/Dockerfile --tag gamaplatform/gama:1.8.1
+      run: docker build . --file ./tags/env.VERSION/Dockerfile --tag gamaplatform/env.IMAGE_NAME:env.VERSION
 
-    - name: Log in Docker Hub
-      run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+    - name: Publish in Docker Hub
+      run: |
+        docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+        docker push gamaplatform/env.IMAGE_NAME:env.VERSION
+        docker logout
 
-    - name: Push new container to Docker Hub
-      run: docker push gamaplatform/gama:1.8.1
+    - name: Publish in Github Package
+      run: |
+        echo "$PAT" | docker login docker.pkg.github.com -u RoiArthurB --password-stdin
+        docker tag env.VERSION docker.pkg.github.com/gama-platform/gama.docker/env.IMAGE_NAME:env.VERSION
+        docker push docker.pkg.github.com/gama-platform/gama.docker/env.IMAGE_NAME:env.VERSION
+        docker logout
+        
