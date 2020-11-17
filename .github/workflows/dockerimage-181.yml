@@ -11,7 +11,6 @@ on:
 env:
   IMAGE_NAME: gama
   VERSION: 1.8.1
-  IMAGE_ID: 784d2d177274 # From Docker Hub
 
 jobs:
   build:
@@ -31,7 +30,8 @@ jobs:
     - name: Publish in Github Package
       run: |
         docker login docker.pkg.github.com -u RoiArthurB -p ${{ secrets.GITHUB_TOKEN }}
-        docker tag ${{ env.IMAGE_ID }} docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        docker images
+        docker tag ${{ docker images | tail -n 1 | cut -d ' ' -f 19 }} docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker logout
         
