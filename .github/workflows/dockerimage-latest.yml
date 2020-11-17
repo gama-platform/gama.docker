@@ -4,7 +4,6 @@ on:
   push:
     paths:
     - 'tags/1.8.1/**'
-    - '.github/workflows/dockerimage-latest.yml'
   schedule:
     - cron: "0 0 * */5 *" # Prevent Docker Hub stale
   workflow_dispatch:
@@ -27,13 +26,3 @@ jobs:
         docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
         docker push gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker logout
-
-    - name: Publish in Github Package
-      run: |
-        docker login docker.pkg.github.com -u RoiArthurB -p ${{ secrets.GITHUB_TOKEN }}
-        docker images
-        echo $(docker images | grep "gamaplatform/gama" | tr -s ' ' | cut -d ' ' -f 3)
-        docker tag $(docker images | grep "gamaplatform/gama" | tr -s ' ' | cut -d ' ' -f 3) docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-        docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-        docker logout
-        
