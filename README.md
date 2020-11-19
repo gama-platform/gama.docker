@@ -54,7 +54,7 @@ docker run -i -t --entrypoint /bin/bash <containerID>
 ### Example
 
 ```
-$ docker run --rm gama-platform/gama:1.8.1 -help
+$ docker run --rm gamaplatform/gama:1.8.1 -help
 gama-headless.sh
 ******************************************************************
 * GAMA version 1.8.1                                             *
@@ -97,7 +97,7 @@ List of available options:
 #### Docker Hub pull
 
 ```shell
-$ docker pull gama-platform/gama:[continuous|1.8.1|..]
+$ docker pull gamaplatform/gama:[continuous|1.8.1|..]
 ```
 
 To see all the available tags, see [there](https://hub.docker.com/r/gamaplatform/gama/tags).
