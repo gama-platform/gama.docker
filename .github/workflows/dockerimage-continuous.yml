@@ -6,7 +6,7 @@ on:
     - 'tags/continuous/**'
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0 30 * * *'
+    - cron:  '30 14 * * *'
   workflow_dispatch:
 
 env:
