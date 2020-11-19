@@ -4,9 +4,8 @@ on:
   push:
     paths:
     - 'tags/1.8.1/**'
-    - '.github/workflows/dockerimage-181.yml'
   schedule:
-    - cron: "0 0 * */5 *" # Prevent Docker Hub stale
+    - cron: "0 0 1 */5 *" # Prevent Docker Hub stale
   workflow_dispatch:
 
 env:
