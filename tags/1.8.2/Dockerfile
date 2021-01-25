@@ -29,10 +29,11 @@ RUN sed -i 's/$( dirname "${BASH_SOURCE\[0\]}" )/\/usr\/lib\/gama\/headless/g' /
 RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 
 # Release image 
-FROM openjdk:11-jdk-alpine
+FROM alpine:3.13
 COPY --from=0 /usr/lib/gama /usr/lib/gama
 
-RUN apk --no-cache add bash ttf-dejavu \
+RUN apk --no-cache add openjdk11-jdk bash ttf-dejavu \
+	&& java -version \
 	&& ln -s /usr/lib/gama/headless/gama-headless.sh /usr/sbin/gama-headless
 
 # Docker env
