@@ -18,8 +18,8 @@ RUN apt update && \
 RUN mkdir -p /usr/lib/gama
 RUN cd /usr/lib/gama
 
-# Install GAMA v1.8.0
-RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/gama/releases/tags/1.8.2 | grep "1.8.2/GAMA.*withJDK.*Linux.*.zip" | cut -d ':' -f 2,3 | tr -d \") && \
+# Install GAMA v1.8.2 w/o JDK
+RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/gama/releases/tags/1.8.2 | grep "1.8.2/GAMA.*Alpha_Linux.*.zip" | cut -d ':' -f 2,3 | tr -d \") && \
 	unzip gama.zip -d /usr/lib/gama
 
 # Set absolute path
