@@ -15,28 +15,28 @@ RUN apt update && \
 	apt install -y --no-install-recommends curl ca-certificates unzip
 
 # Create GAMA workspace
-RUN mkdir -p /usr/lib/gama
-RUN cd /usr/lib/gama
+RUN mkdir -p /opt/gama-platform
+RUN cd /opt/gama-platform
 
 # Install GAMA v1.8.2 w/o JDK
 RUN curl -o gama.zip -fSL $(curl -s https://api.github.com/repos/gama-platform/gama/releases/tags/1.8.2 | grep "1.8.2/GAMA.*Linux.*.zip" | cut -d ':' -f 2,3 | tr -d \") && \
-	unzip gama.zip -d /usr/lib/gama
+	unzip gama.zip -d /opt/gama-platform
 
 # Set absolute path
-RUN sed -i 's/$( dirname "${BASH_SOURCE\[0\]}" )/\/usr\/lib\/gama\/headless/g' /usr/lib/gama/headless/gama-headless.sh
+RUN sed -i 's/$( dirname "${BASH_SOURCE\[0\]}" )/\/opt\/gama-platform\/headless/g' /opt/gama-platform/headless/gama-headless.sh
 
 # Make script executable
-RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
+RUN chmod +x /opt/gama-platform/Gama /opt/gama-platform/headless/gama-headless.sh
 
 # Release image 
 FROM openjdk:17-jdk-alpine
-COPY --from=0 /usr/lib/gama /usr/lib/gama
+COPY --from=0 /opt/gama-platform /opt/gama-platform
 
 RUN apk --no-cache add bash ttf-dejavu libstdc++ libc6-compat \
-	&& ln -s /usr/lib/gama/headless/gama-headless.sh /usr/sbin/gama-headless
+	&& ln -s /opt/gama-platform/headless/gama-headless.sh /usr/sbin/gama-headless
 
 # Docker env
-WORKDIR /usr/lib/gama/headless
+WORKDIR /opt/gama-platform/headless
 
 ENTRYPOINT ["gama-headless"]
 CMD ["-help"]
