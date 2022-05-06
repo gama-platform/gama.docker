@@ -29,10 +29,10 @@ RUN sed -i 's/$( dirname "${BASH_SOURCE\[0\]}" )/\/usr\/lib\/gama\/headless/g' /
 RUN chmod +x /usr/lib/gama/Gama /usr/lib/gama/headless/gama-headless.sh
 
 # Release image 
-FROM openjdk:15-jdk-alpine
+FROM openjdk:17-jdk-alpine
 COPY --from=0 /usr/lib/gama /usr/lib/gama
 
-RUN apk --no-cache add bash ttf-dejavu libstdc++ \
+RUN apk --no-cache add bash ttf-dejavu libstdc++ libc6-compat \
 	&& ln -s /usr/lib/gama/headless/gama-headless.sh /usr/sbin/gama-headless
 
 # Docker env
