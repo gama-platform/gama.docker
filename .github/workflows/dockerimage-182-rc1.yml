@@ -1,0 +1,41 @@
+name: Docker Image CI - 1.8.2
+
+on:
+  push:
+    paths:
+    - 'tags/1.8.2-rc1/**'
+  schedule:
+    - cron: "11 0 1 */5 *" # Prevent Docker Hub stale
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: gama
+  VERSION: 1.8.2-rc1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build the Docker image
+      run: docker build . --file ./tags/${{ env.VERSION }}/Dockerfile --tag gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+
+    - name: Publish in Docker Hub
+      run: |
+        docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+        docker push gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        docker logout
+
+    - name: Publish in Github Package
+      run: |
+        docker login docker.pkg.github.com -u ${{ secrets.BOT_GH_NAME }} -p ${{ secrets.GITHUB_TOKEN }}
+
+        # Find Docker image ID
+        docker images
+        echo $(docker images | grep "gamaplatform/gama" | tr -s ' ' | cut -d ' ' -f 3)
+        
+        docker tag $(docker images | grep "gamaplatform/gama" | tr -s ' ' | cut -d ' ' -f 3) docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        docker logout
+        
