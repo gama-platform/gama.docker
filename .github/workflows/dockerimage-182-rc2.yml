@@ -1,4 +1,4 @@
-name: Docker Image CI - 1.8.2
+name: Docker Image CI - 1.8.2-RC2
 
 on:
   push:
