@@ -19,7 +19,7 @@ RUN mkdir -p /opt/gama-platform
 RUN cd /opt/gama-platform
 
 # Install GAMA v1.8.2 w/o JDK
-RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/download/1.8.2-RC1/GAMA_1.8.2-RC1_Linux.zip && \
+RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama.resources/releases/download/1.8.2-RC1/GAMA_1.8.2-RC1_Linux.zip && \
 	unzip gama.zip -d /opt/gama-platform
 
 # Set absolute path

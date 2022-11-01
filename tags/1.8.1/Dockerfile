@@ -19,7 +19,7 @@ RUN mkdir -p /usr/lib/gama
 RUN cd /usr/lib/gama
 
 # Install GAMA v1.8.0
-RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/download/1.8.1/GAMA_1.8.1_Linux.zip && \
+RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama.resources/releases/download/1.8.1/GAMA_1.8.1_Linux.zip && \
 	unzip gama.zip -d /usr/lib/gama
 
 # Set absolute path

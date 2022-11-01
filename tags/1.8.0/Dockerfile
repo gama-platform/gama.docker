@@ -19,7 +19,7 @@ RUN mkdir -p /usr/lib/gama
 RUN cd /usr/lib/gama
 
 # Install GAMA v1.8.0
-RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/download/v1.8.0/GAMA_1.8_Linux.zip && \
+RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama.resources/releases/download/1.8/GAMA_1.8_Linux.zip && \
 	unzip gama.zip -d /usr/lib/gama && \
 	# Set everything in absolute path
 	sed -i 's/\.\.\//\/usr\/lib\/gama\//g' /usr/lib/gama/headless/gama-headless.sh
