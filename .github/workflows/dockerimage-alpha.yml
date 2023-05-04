@@ -1,18 +1,18 @@
 name: Docker Image CI - Pre-Release
 
 on:
-#  push:
-#    paths:
-#    - 'tags/1.9.1/**'
+  push:
+    paths:
+    - 'tags/alpha/**'
 #  schedule:
 #    - cron: "10 0 1 */5 *" # Prevent Docker Hub stale
-#  workflow_dispatch:
-#  repository_dispatch: # For POST request trigger
-#    types: automated-generation
+  workflow_dispatch:
+  repository_dispatch: # For POST request trigger
+    types: automated-generation
 
 env:
   IMAGE_NAME: gama
-  VERSION: 1.9.1
+  VERSION: 1.9.2
 
 jobs:
   build:
@@ -21,25 +21,26 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Build the Docker image
-      run: docker build . --file ./tags/${{ env.VERSION }}/Dockerfile --tag gamaplatform/${{ env.IMAGE_NAME }}:alpha
+      run: docker build . --file ./tags/alpha/Dockerfile --tag gamaplatform/${{ env.IMAGE_NAME }}:alpha
 
     - name: Publish in Docker Hub
       run: |
         docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-        
+        # Push alpha
+        docker push gamaplatform/${{ env.IMAGE_NAME }}:alpha
+        # Push 1.9.2
         docker tag gamaplatform/${{ env.IMAGE_NAME }}:alpha gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker push gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-        
-        docker push gamaplatform/${{ env.IMAGE_NAME }}:alpha
-
         docker logout
 
     - name: Publish in Github Package
       run: |
         docker login docker.pkg.github.com -u ${{ secrets.BOT_GH_NAME }} -p ${{ secrets.GITHUB_TOKEN }}
-        
+        # Push 1.9.2
+        docker tag gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }} docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        # Push alpha
         docker tag gamaplatform/${{ env.IMAGE_NAME }}:alpha docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:alpha
         docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:alpha
-
         docker logout
         
