@@ -4,8 +4,6 @@ on:
   push:
     paths:
     - 'tags/alpha/**'
-#  schedule:
-#    - cron: "10 0 1 */5 *" # Prevent Docker Hub stale
   workflow_dispatch:
   repository_dispatch: # For POST request trigger
     types: automated-generation

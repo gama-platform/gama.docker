@@ -4,8 +4,6 @@ on:
   push:
     paths:
     - 'tags/1.9.0/**'
-  schedule:
-    - cron: "13 0 1 */5 *" # Prevent Docker Hub stale
   workflow_dispatch:
 
 env:

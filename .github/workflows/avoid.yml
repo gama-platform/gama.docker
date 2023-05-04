@@ -29,3 +29,18 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           branch: ${{ github.ref }}
+
+      - name: "Prevent Docker Hub stale"
+        run: |
+          docker pull gamaplatform/gama:1.8-rc2
+          docker pull gamaplatform/gama:1.8.0
+          docker pull gamaplatform/gama:1.8.1
+          docker image prune -a -f
+          docker pull gamaplatform/gama:1.8.2-rc1
+          docker pull gamaplatform/gama:1.8.2-rc2
+          docker pull gamaplatform/gama:1.9.0
+          docker image prune -a -f
+          docker pull gamaplatform/gama:1.9.1
+          docker pull gamaplatform/gama:1.9.2
+          docker pull gamaplatform/gama:latest
+          docker pull gamaplatform/gama:alpha
