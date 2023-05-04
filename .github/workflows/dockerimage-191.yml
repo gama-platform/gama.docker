@@ -34,12 +34,11 @@ jobs:
     - name: Publish in Github Package
       run: |
         docker login docker.pkg.github.com -u ${{ secrets.BOT_GH_NAME }} -p ${{ secrets.GITHUB_TOKEN }}
-
-        # Find Docker image ID
-        docker images
-        echo $(docker images | grep "gamaplatform/gama" | tr -s ' ' | cut -d ' ' -f 3)
-        
-        docker tag $(docker images | grep "gamaplatform/gama" | tr -s ' ' | cut -d ' ' -f 3) docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        # Push 1.9.1
+        docker tag gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }} docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        # Push latest
+        docker tag gamaplatform/${{ env.IMAGE_NAME }}:latest docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:latest
+        docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:latest
         docker logout
         
