@@ -6,7 +6,7 @@ on:
     - cron: '0 0 1 * *'
 
 jobs:
-  auto_renew:
+  github_stale:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout codes'
@@ -28,8 +28,12 @@ jobs:
         if: steps.commit.output.status != 'success'
         uses: ad-m/github-push-action@v0.6.0
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
 
+  docker_stale:
+    runs-on: ubuntu-latest
+    steps:
       - name: "Prevent Docker Hub stale"
         run: |
           docker pull gamaplatform/gama:1.8-rc2
