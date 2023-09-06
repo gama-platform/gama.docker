@@ -35,8 +35,5 @@ jobs:
         # Push 1.9.1
         docker tag gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }} docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-        # Push latest
-        docker tag gamaplatform/${{ env.IMAGE_NAME }}:latest docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:latest
-        docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:latest
         docker logout
         
