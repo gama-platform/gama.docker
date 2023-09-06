@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 MAINTAINER RoiArthurB <https://github.com/RoiArthurB>
 
-LABEL org.label-schema.name="GAMA Headless Docker (1.9.3)" \
+LABEL org.label-schema.name="GAMA Headless Docker (1.9.2)" \
 		org.label-schema.description="Docker image of GAMA headless" \
 		org.label-schema.url="http://gama-platform.org" \
 		org.label-schema.vcs-ref=$VCS_REF \
@@ -12,14 +12,14 @@ LABEL org.label-schema.name="GAMA Headless Docker (1.9.3)" \
 
 # Update Ubuntu mirror && install needed software
 RUN apt update && \
-	apt install -y --no-install-recommends curl wget ca-certificates unzip
+	apt install -y --no-install-recommends curl ca-certificates unzip
 
 # Create GAMA workspace
 RUN mkdir -p /opt/gama-platform
 RUN cd /opt/gama-platform
 
-# Install GAMA v1.9.3 w/o JDK
-RUN wget -q $(curl https://api.github.com/repos/gama-platform/gama/releases/tags/1.9.3 | grep "/GAMA_1.9.3_Linux_[0-9].*zip" | cut -d ':' -f 2,3 | tr -d \")  -O "gama.zip" && \
+# Install GAMA v1.9.2 w/o JDK
+RUN curl -o gama.zip -fSL https://github.com/gama-platform/gama/releases/download/1.9.2/GAMA_1.9.2_Linux.zip && \
 	unzip gama.zip -d /opt/gama-platform
 
 # Set absolute path
