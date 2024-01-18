@@ -27,7 +27,7 @@ The [GAMA Platform Docker repository](https://hub.docker.com/r/gamaplatform/gama
   - [_continuous_](https://hub.docker.com/layers/gamaplatform/gama/continuous/images/sha256-d6cc685be16d8cd3f0b0644990b20ba75294b567fdc97742671beea8408d44d0?context=explore) which is the edge version build every day 
   - [_monthly_](https://hub.docker.com/layers/gamaplatform/gama/monthly/images/sha256-9a21bd7860e3833b7fcd40d78e3dfda1fdf7f923e68b875ae37d1925cb47a78d?context=explore) which is build every month
 - **Meta tags**
-  - [_latest_](https://hub.docker.com/layers/gamaplatform/gama/latest/images/sha256-15746fa81624c38b085d891e521fb4fe737f06b3a1f6a955dc53b4d5558ad46f?context=explore) which is the latest official release (currently it's the version 1.8.1 )
+  - [_latest_](https://hub.docker.com/layers/gamaplatform/gama/latest/images/sha256-15746fa81624c38b085d891e521fb4fe737f06b3a1f6a955dc53b4d5558ad46f?context=explore) which is the latest official release (currently it's the version 1.9.2 )
 
 #### Simple usage
 
