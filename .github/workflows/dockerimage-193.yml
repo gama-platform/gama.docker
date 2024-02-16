@@ -1,14 +1,14 @@
-name: Docker Image CI - 1.9.2
+name: Docker Image CI - 1.9.3
 
 on:
   push:
     paths:
-    - 'tags/1.9.2/**'
+    - 'tags/1.9.3/**'
   workflow_dispatch:
 
 env:
   IMAGE_NAME: gama
-  VERSION: 1.9.2
+  VERSION: 1.9.3
 
 jobs:
   build:
@@ -22,15 +22,21 @@ jobs:
     - name: Publish in Docker Hub
       run: |
         docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-        # Push 1.9.2
+        # Push 1.9.3
         docker push gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        # Push latest
+        docker tag gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }} gamaplatform/${{ env.IMAGE_NAME }}:latest
+        docker push gamaplatform/${{ env.IMAGE_NAME }}:latest
         docker logout
 
     - name: Publish in Github Package
       run: |
         docker login docker.pkg.github.com -u ${{ secrets.BOT_GH_NAME }} -p ${{ secrets.GITHUB_TOKEN }}
-        # Push 1.9.2
+        # Push 1.9.3
         docker tag gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }} docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        # Push latest
+        docker tag gamaplatform/${{ env.IMAGE_NAME }}:latest docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:latest
+        docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:latest
         docker logout
         
