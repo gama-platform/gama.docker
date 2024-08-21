@@ -19,7 +19,7 @@ RUN mkdir -p /opt/gama-platform
 RUN cd /opt/gama-platform
 
 # Install GAMA v1.9.4 w/o JDK
-RUN wget -q $(curl https://api.github.com/repos/gama-platform/gama/releases/tags/2024.07.0 | grep "/GAMA_1.9.4_Linux_[0-9].*zip" | cut -d ':' -f 2,3 | tr -d \")  -O "gama.zip" && \
+RUN wget -q $(curl https://api.github.com/repos/gama-platform/gama/releases/tags/2024.07.0 | grep "/GAMA_2024.07.0_Linux_[0-9].*zip" | cut -d ':' -f 2,3 | tr -d \")  -O "gama.zip" && \
 	unzip gama.zip -d /opt/gama-platform
 
 # Set absolute path
@@ -29,7 +29,7 @@ RUN sed -i 's/$( dirname "${BASH_SOURCE\[0\]}" )/\/opt\/gama-platform\/headless/
 RUN chmod +x /opt/gama-platform/Gama /opt/gama-platform/headless/gama-headless.sh
 
 # Release image 
-FROM openjdk:21-jdk-alpine
+FROM eclipse-temurin:21-alpine
 COPY --from=0 /opt/gama-platform /opt/gama-platform
 
 RUN apk --no-cache add bash ttf-dejavu libstdc++ libc6-compat \
