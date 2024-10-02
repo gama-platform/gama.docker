@@ -1,6 +1,6 @@
 # GAMA Docker Container
 
-This project is a simple Docker image that contains a GAMA platform ready to use in headless mode within a minimal [Alpine](https://alpinelinux.org/) [OpenJDK JRE 17](https://openjdk.java.net/) container.
+This project is a simple Docker image that contains a GAMA platform ready to use in headless mode within a minimal [Alpine](https://alpinelinux.org/) with [Eclipse Adoptium OpenJDK 21 64-Bit Server VM](https://adoptium.net/temurin/releases/) container.
 
 ## Getting Started
 
