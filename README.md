@@ -9,11 +9,7 @@ These instructions will cover usage information and for the docker container
 ### Prerequisities
 
 
-In order to run this container you'll need docker installed.
-
-* [Windows](https://docs.docker.com/windows/started)
-* [OS X](https://docs.docker.com/mac/started/)
-* [Linux](https://docs.docker.com/linux/started/)
+In order to run this container you'll need to install [docker](https://docs.docker.com/get-started/get-docker/).
 
 ### Usage
 
@@ -24,17 +20,16 @@ The [GAMA Platform Docker repository](https://hub.docker.com/r/gamaplatform/gama
 - **Stable releases** 
   - starting from [1.8 Release Candidate 2](https://hub.docker.com/layers/gamaplatform/gama/1.8-rc2/images/sha256-76035a577c8541ca6610a949cc58a4e76a7423da2e89c140a67cd75ae3e29efc?context=explore)
 - **Rolling releases** 
-  - [_continuous_](https://hub.docker.com/layers/gamaplatform/gama/continuous/images/sha256-d6cc685be16d8cd3f0b0644990b20ba75294b567fdc97742671beea8408d44d0?context=explore) which is the edge version build every day 
-  - [_monthly_](https://hub.docker.com/layers/gamaplatform/gama/monthly/images/sha256-9a21bd7860e3833b7fcd40d78e3dfda1fdf7f923e68b875ae37d1925cb47a78d?context=explore) which is build every month
+  - [_alpha_](https://hub.docker.com/layers/gamaplatform/gama/alpha/images/sha256-f381dcea8d1f7dac3bb18752a5ce263c32a0e90474dc14b8799d73a320d5f67c?context=explore) which is the latest build done with current github code. This is not tested contrary to official releases.
 - **Meta tags**
-  - [_latest_](https://hub.docker.com/layers/gamaplatform/gama/latest/images/sha256-15746fa81624c38b085d891e521fb4fe737f06b3a1f6a955dc53b4d5558ad46f?context=explore) which is the latest official release (currently it's the version 1.9.2 )
+  - [_latest_](https://hub.docker.com/layers/gamaplatform/gama/latest/images/sha256-15746fa81624c38b085d891e521fb4fe737f06b3a1f6a955dc53b4d5558ad46f?context=explore) which is the latest official release
 
 #### Simple usage
 
 The command to run the previously builded image is simple as below
 
 ```
-docker run gamaplatform/gama:continuous <custom argument for headless execution>
+docker run gamaplatform/gama:latest <custom argument for headless execution>
 ```
 
 By default, if you don't add argument after the container image, it will display the help message.
@@ -90,14 +85,14 @@ List of available options:
 
 * `/opt/gama-platform` - The installed version of [GAMA](http://gama-platform.org)
 
-* `/opt/gama-platform/headless/gama-platform.sh` - The helping file to launch [GAMA Headless](http://gama-platform.org/wiki/Headless)
+* `/opt/gama-platform/headless/gama-platform.sh` - The helping file to launch [GAMA Headless](https://gama-platform.org/wiki/RunningHeadless)
 
 ### Installing
 
 #### Docker Hub pull
 
 ```shell
-$ docker pull gamaplatform/gama:[continuous|1.8.1|..]
+$ docker pull gamaplatform/gama:[latest|1.8.1|..]
 ```
 
 To see all the available tags, see [there](https://hub.docker.com/r/gamaplatform/gama/tags).
