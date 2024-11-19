@@ -19,7 +19,7 @@ RUN mkdir -p /opt/gama-platform
 RUN cd /opt/gama-platform
 
 # Install GAMA v1.9.4 w/o JDK
-RUN wget -q $(curl https://api.github.com/repos/gama-platform/gama/releases/tags/2024.08.0 | grep "/GAMA_2024.08.0_Linux_[0-9].*zip" | cut -d ':' -f 2,3 | tr -d \")  -O "gama.zip" && \
+RUN wget -q $(curl https://api.github.com/repos/gama-platform/gama/releases/tags/2024.11.0 | grep "/GAMA_2024.11.0_Linux_[0-9].*zip" | cut -d ':' -f 2,3 | tr -d \")  -O "gama.zip" && \
 	unzip gama.zip -d /opt/gama-platform
 
 # Set absolute path
