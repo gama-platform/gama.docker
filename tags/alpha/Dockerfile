@@ -29,7 +29,7 @@ RUN sed -i 's/$( dirname "${BASH_SOURCE\[0\]}" )/\/opt\/gama-platform\/headless/
 RUN chmod +x /opt/gama-platform/Gama /opt/gama-platform/headless/gama-headless.sh
 
 # Release image 
-FROM eclipse-temurin:21-alpine
+FROM eclipse-temurin:23-alpine
 COPY --from=0 /opt/gama-platform /opt/gama-platform
 
 RUN apk --no-cache add bash ttf-dejavu libstdc++ libc6-compat \
