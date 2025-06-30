@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 MAINTAINER RoiArthurB <https://github.com/RoiArthurB>
 
-LABEL org.label-schema.name="GAMA Headless Docker - Pre-release" \
+LABEL org.label-schema.name="GAMA Headless Docker - 2025.06" \
 		org.label-schema.description="Docker image of GAMA headless" \
 		org.label-schema.url="http://gama-platform.org" \
 		org.label-schema.vcs-ref=$VCS_REF \
@@ -18,8 +18,8 @@ RUN apt update && \
 RUN mkdir -p /opt/gama-platform
 RUN cd /opt/gama-platform
 
-# Install GAMA alpha w/o JDK
-RUN wget -q $(curl -s https://api.github.com/repos/gama-platform/gama/releases | jq '[.[] | select(.prerelease == true)][0] .assets[] | select(.name | test("^GAMA_.*_Linux_.*_.*\\.zip$") and (contains("_with_JDK") | not)) | .browser_download_url' | tr -d \")  -O "gama.zip" && \
+# Install GAMA v2025.06.3 w/o JDK
+RUN wget -q https://github.com/gama-platform/gama/releases/download/2025.06.3/GAMA_2025.06.3_Linux.zip -O "gama.zip" && \
 	unzip gama.zip -d /opt/gama-platform
 
 # Set absolute path
