@@ -1,14 +1,14 @@
-name: Docker Image CI - 2025.06.3
+name: Docker Image CI - 2025.06.4
 
 on:
   push:
     paths:
-    - 'tags/2025.06.3/**'
+    - 'tags/2025.06.4/**'
   workflow_dispatch:
 
 env:
   IMAGE_NAME: gama
-  VERSION: 2025.06.3
+  VERSION: 2025.06.4
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
     - name: Publish in Docker Hub
       run: |
         docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-        # Push 2025.06.3
+        # Push 2025.06.4
         docker push gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         # Push latest
         docker tag gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }} gamaplatform/${{ env.IMAGE_NAME }}:latest
@@ -32,7 +32,7 @@ jobs:
     - name: Publish in Github Package
       run: |
         docker login docker.pkg.github.com -u ${{ secrets.BOT_GH_NAME }} -p ${{ secrets.GITHUB_TOKEN }}
-        # Push 2025.06.3
+        # Push 2025.06.4
         docker tag gamaplatform/${{ env.IMAGE_NAME }}:${{ env.VERSION }} docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         docker push docker.pkg.github.com/gama-platform/gama.docker/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
         # Push latest

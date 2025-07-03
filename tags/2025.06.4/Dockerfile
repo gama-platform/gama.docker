@@ -18,8 +18,8 @@ RUN apt update && \
 RUN mkdir -p /opt/gama-platform
 RUN cd /opt/gama-platform
 
-# Install GAMA v2025.06.3 w/o JDK
-RUN wget -q https://github.com/gama-platform/gama/releases/download/2025.06.3/GAMA_2025.06.3_Linux.zip -O "gama.zip" && \
+# Install GAMA v2025.06.4 w/o JDK
+RUN wget -q https://github.com/gama-platform/gama/releases/download/2025.06.4/GAMA_2025.06.4_Linux.zip -O "gama.zip" && \
 	unzip gama.zip -d /opt/gama-platform
 
 # Set absolute path
