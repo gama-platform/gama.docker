@@ -1,0 +1,10 @@
+services:
+  gama:
+    image: gamaplatform/gama:alpha
+    # Modify here the command to be run by the container upon execution
+    command: gama-headless -v /opt/gama-platform/headless/samples/roadTraffic.xml /opt/gama-platform/output
+    container_name: gama_container
+    # Map the outputs of the execution to a local "output" directory
+    volumes: 
+      - ./output:/opt/gama-platform/output
+    restart: no

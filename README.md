@@ -116,7 +116,35 @@ Build the Docker image
 ```
 docker build -t gama .
 ```
-
+## Docker compose 
+```
+services:
+  gama:
+    image: gamaplatform/gama:alpha
+    # Modify here the command to be run by the container upon execution
+    command: gama-headless -v /opt/gama-platform/headless/samples/roadTraffic.xml /opt/gama-platform/output
+    container_name: gama_container
+    # Map the outputs of the execution to a local "output" directory
+    volumes: 
+      - ./output:/opt/gama-platform/output
+    restart: no
+```
+You can run the following to execute the example docker compose file :
+```
+$ docker compose up -d
+```
+If you want to run your own model inside the container, map it to volumes inside the container :
+```
+services:
+  gama:
+    image: gamaplatform/gama:alpha
+    command: gama-headless -v /opt/gama-platform/headless/your_model/ExperimentFile.xml /opt/gama-platform/output
+    container_name: gama_container
+    volumes: 
+      - ./output:/opt/gama-platform/output
+      - /path/to/your_model:/opt/gama-platform/headless/your_model
+    restart: no
+```
 ## Built With
 
 * GAMA-Platform - https://github.com/gama-platform/gama/releases/
